@@ -1,0 +1,20 @@
+# Нормализация переносов строк для всех текстовых файлов:
+# Git сам определит текстовые файлы и приведёт их к LF в репозитории,
+# а в рабочем дереве выдаст в стиле текущей ОС.
+* text=auto
+
+# Явные правила для скриптов и конфигов: всегда LF (Unix-стиль).
+*.sh   text eol=lf
+*.py   text eol=lf
+*.yml  text eol=lf
+*.yaml text eol=lf
+
+# Windows-скрипты: всегда CRLF.
+*.bat text eol=crlf
+*.cmd text eol=crlf
+
+# Бинарные файлы: Git их не трогает.
+*.png binary
+*.jpg binary
+*.pdf binary
+*.zip binary

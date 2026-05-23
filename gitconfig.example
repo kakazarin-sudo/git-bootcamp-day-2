@@ -1,0 +1,55 @@
+[init]
+	defaultBranch = main
+[user]
+	name = <username>
+	email = <user email>
+[core]
+	editor = code --wait
+[alias]
+	st = status
+    co = checkout
+    br = branch
+    # Красивый граф истории — один из самых полезных
+    lg = log --oneline --graph --all --decorate
+	# История с датами и авторами — удобно для code review
+    ll = log --oneline --decorate
+
+    # Последний коммит — что в него вошло
+    last = log -1 HEAD --stat
+
+    # Отменить последний коммит, оставив изменения в рабочей директории
+    undo = reset HEAD~1 --mixed
+
+    # Показать все алиасы
+    aliases = config --get-regexp alias
+
+    # Список веток отсортированный по дате последнего коммита
+    brd = branch --sort=-committerdate
+
+    # Добавить в staging и сразу закоммитить с сообщением
+    cam = commit -am
+	
+	# Показать файлы изменённые в конкретном коммите
+    show-files = diff-tree --no-commit-id -r --name-only
+
+    # Найти коммиты по строке в сообщении
+    find = log --all --grep
+
+    # Быстро посмотреть что изменилось относительно main
+    wip = diff main..HEAD --stat
+
+    # Удалить все ветки которые уже слиты в main
+    # ! означает что дальше идёт shell-команда, а не git-команда
+    cleanup = !git branch --merged main | grep -v 'main' | xargs git branch -d
+
+    # Показать «чистый» статус — без неотслеживаемых файлов
+    tracked = status --untracked-files=no
+
+
+[commit]
+	template = /Users/<username>/.gitmessage
+[merge]
+	conflictstyle = diff3
+	tool = vscode
+[mergetool "vscode"]
+	cmd = code --wait $MERGED
